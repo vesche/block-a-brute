@@ -1,6 +1,18 @@
 # block-a-brute
 
-This is a command-line tool for blocking IP addresses conducting SSH bruteforce attempts. It gives geoip information by scraping [ipinfo.io](https://ipinfo.io) and blocks IP addresses using good ol' iptables. Geoip information is typically all I need to look at to make a determination if an IP address should be blocked. If you'd like something more automated and mature, check out [Fail2ban](https://en.wikipedia.org/wiki/Fail2ban). This tool is useful if you'd like to make hard determinations on hosts to block, such as on a honeypot or a sensitive public server.
+This is a command-line tool for blocking IP addresses conducting SSH bruteforce attempts. It uses `auth.log` to find SSH login attempts and gets IP geolocation information by scraping [ipinfo.io](https://ipinfo.io) and blocks IP addresses using good ol' iptables. Geoip information is typically all I need to look at to make a determination if an IP address should be blocked. If you'd like something more automated and mature, check out [Fail2ban](https://en.wikipedia.org/wiki/Fail2ban). This tool is useful if you'd like to make hard determinations on hosts to block, such as on a honeypot or a sensitive public server.
+
+## Whitelist
+A whilelist file can be included to have block-a-brute ignore certain hosts.
+
+IP's should be listed on separate lines like so:
+```
+# home
+1.2.3.4
+
+# work
+5.6.7.8
+```
 
 ## Usage
 ```
@@ -16,15 +28,6 @@ optional arguments:
 -l LOG, --log LOG     log file)
 -y, --yes             ban IP's without prompting
 
-```
-
-A whilelist file can be included to have block-a-brute ignore certain hosts. IP's should be listed on seperate lines like so:
-```
-# home
-1.2.3.4
-
-# work
-5.6.7.8
 ```
 
 Here's how to throw down the banhammer:
