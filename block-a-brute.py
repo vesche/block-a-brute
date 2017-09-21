@@ -73,7 +73,7 @@ def get_parser():
     parser.add_argument('-w', '--whitelist',
                         help='ip whitelist file', type=str)
     parser.add_argument('-l', '--log',
-                        help='log file)', type=str)
+                        help='log file', type=str)
     parser.add_argument('-y', '--yes',
                         help='ban IP\'s without prompting',
                         default=False, action='store_true')

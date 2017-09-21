@@ -19,13 +19,13 @@ IP's should be listed on separate lines like so:
 $ ./block-a-brute.py --help
 usage: block-a-brute.py [-h] [-w WHITELIST] [-l LOG] [-y]
 
-block-a-brute
+block-a-brute - block SSH bruteforcers
 
 optional arguments:
 -h, --help            show this help message and exit
 -w WHITELIST, --whitelist WHITELIST
                       ip whitelist file
--l LOG, --log LOG     log file)
+-l LOG, --log LOG     log file
 -y, --yes             ban IP's without prompting
 
 ```
