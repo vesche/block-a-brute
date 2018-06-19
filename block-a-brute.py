@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-#
-# block-a-brute
-# https://github.com/vesche/block-a-brute
-#
+"""
+block-a-brute: block ssh bruteforcers
+https://github.com/vesche/block-a-brute
+"""
 
 import argparse
 import json
@@ -17,14 +17,14 @@ import time
 
 from urllib.parse import urlparse
 
-BANNER = '''
+BANNER = """
  _     _            _                     _                _
 | |__ | | ___   ___| | __      __ _      | |__  _ __ _   _| |_ ___
 | '_ \| |/ _ \ / __| |/ /____ / _` |_____| '_ \| '__| | | | __/ _ \\
 | |_) | | (_) | (__|   <_____| (_| |_____| |_) | |  | |_| | ||  __/
 |_.__/|_|\___/ \___|_|\_\     \__,_|     |_.__/|_|   \__,_|\__\___|
               https://github.com/vesche/block-a-brute
-'''
+"""
 
 
 def _autoban_preflight():
@@ -38,11 +38,13 @@ def _autoban_preflight():
 
 
 def ban_ip(ip):
+    """Ban an IP address using iptables."""
     command = 'iptables -A INPUT -s {} -j DROP'.format(ip)
     subprocess.call(command.split())
 
 
 def check_ip(ip, whitelist):
+    """Check if an IP address is whitelisted or already blocked."""
     for good_ip in whitelist:
         if ip == good_ip:
             return True
@@ -60,7 +62,12 @@ def check_ip(ip, whitelist):
 
 
 def load_whitelist(whitelist_file):
-    whitelist = []
+    """Load provided whitelist file."""
+    if not os.path.isfile(whitelist_file):
+        print('Error: Whitelist file not found.')
+        sys.exit(1)
+
+    whitelist = ['127.0.0.1']
     with open(whitelist_file) as f:
         for line in f.read().splitlines():
             if not line.startswith('#'):
